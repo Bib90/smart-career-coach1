@@ -4,7 +4,7 @@ import os
 import re
 import pandas as pd
 from datetime import datetime
-openai.api_key = os.getenv("OPENAI_API_KEY"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # --- Ensure feedback.csv exists ---
 if not os.path.exists("feedback.csv"):
