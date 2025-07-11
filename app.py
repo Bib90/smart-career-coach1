@@ -13,7 +13,8 @@ def get_gsheet():
                      "https://www.googleapis.com/auth/drive"]
             creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
             client = gspread.authorize(creds)
-            return client.open("SmartCareerCoachFeedback").sheet1
+            return client.open("SmartCareerFeedback").sheet1
+
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
