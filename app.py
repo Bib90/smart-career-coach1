@@ -1,15 +1,16 @@
 import streamlit as st
+import os
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 
 def get_gsheet():
-    creds_dict = st.secrets["gcp_service_account"]
-    creds_json = json.loads(creds_dict.to_json())  # convert AttrDict to dict
-    scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
-    client = gspread.authorize(creds)
-    return client
+        creds_dict = st.secrets["gcp_service_account"]  
+        scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+        client = gspread.authorize(creds)
+        return client.open("SmartCareerFeedback").sheet1
+
 
 try:
     client = get_gsheet()
@@ -22,7 +23,8 @@ except Exception as e:
 
 
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = st.secrets["openai_api_key"]
+
 
 # --- Ensure feedback.csv exists ---
 sheet = get_gsheet()
