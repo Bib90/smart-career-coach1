@@ -105,28 +105,33 @@ Job Description:
                             # 👍 👎 Feedback buttons
                             feedback_key = f"feedback_{idx}"
                             col1, col2 = st.columns(2)
-
 with col1:
     if st.button("👍 Helpful", key=f"{feedback_key}_up"):
         st.success("Thanks for the feedback!")
         try:
-            sheet = get_gsheet()
-            sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👍", parts['confidence']])
+             sheet = get_gsheet()
+             sheet.append_row([
+                 str(datetime.now()),
+                 f"Suggestion {idx}",
+                 "👍",
+                 parts['confidence']
+             ])
         except Exception as e:
-            st.warning(f"Failed to save feedback: {e}")
+              st.warning(f"Failed to save feedback: {e}")
 
-with col2:
+ with col2:
     if st.button("👎 Not Helpful", key=f"{feedback_key}_down"):
-        st.info("Got it — we’ll improve this.")
+       st.info("Got it – we’ll improve this.")
         try:
-            sheet = get_gsheet()
-            sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👎", parts['confidence']])
+             sheet = get_gsheet()
+             sheet.append_row([
+                   str(datetime.now()),
+                    f"Suggestion {idx}",
+                     "👎",
+                     parts['confidence']
+             ]) 
         except Exception as e:
-            st.warning(f"Failed to save feedback: {e}")
-
-
-                except Exception as e:
-                    st.error(f"Error: {str(e)}")
+             st.warning(f"Failed to save feedback: {e}")
 
 # -----------------------------------
 # 📊 TAB 2: Feedback Log Viewer
