@@ -1,19 +1,24 @@
 import streamlit as st
-import openai
-import os
-import re
-import pandas as pd
-from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import json
 
 def get_gsheet():
-            creds_dict = st.secrets["gcp_service_account"]  # No need to .to_json()
-            scope = ["https://www.googleapis.com/auth/spreadsheets", 
-                     "https://www.googleapis.com/auth/drive"]
-            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-            client = gspread.authorize(creds)
-            return client.open("SmartCareerFeedback").sheet1
+    creds_dict = st.secrets["gcp_service_account"]
+    creds_json = json.loads(creds_dict.to_json())  # convert AttrDict to dict
+    scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
+    client = gspread.authorize(creds)
+    return client
+
+try:
+    client = get_gsheet()
+    sheet = client.open("SmartCareerFeedback").sheet1
+    st.success("✅ Successfully connected to Google Sheet!")
+    st.write("First row of data:", sheet.row_values(1))
+except Exception as e:
+    st.error(f"❌ Failed to connect: {e}")
+
 
 
 
