@@ -119,7 +119,7 @@ with col1:
         except Exception as e:
               st.warning(f"Failed to save feedback: {e}")
 
- with col2:
+with col2:
     if st.button("👎 Not Helpful", key=f"{feedback_key}_down"):
        st.info("Got it – we’ll improve this.")
         try:
