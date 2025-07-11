@@ -4,6 +4,15 @@ import os
 import re
 import pandas as pd
 from datetime import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+def get_gsheet():
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds_dict = st.secrets["gcp_service_account"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("SmartCareerFeedback").sheet1
+    return sheet
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # --- Ensure feedback.csv exists ---
