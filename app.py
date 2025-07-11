@@ -7,8 +7,7 @@ from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-
-        def get_gsheet():
+def get_gsheet():
             creds_dict = st.secrets["gcp_service_account"]  # No need to .to_json()
             scope = ["https://www.googleapis.com/auth/spreadsheets", 
                      "https://www.googleapis.com/auth/drive"]
