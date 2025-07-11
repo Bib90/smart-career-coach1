@@ -7,18 +7,16 @@ from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-def get_gsheet():
-    scope = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
-]
-    creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "smaart-career-coach-384f07ed6ffc.json", scope
-)
 
-    client = gspread.authorize(creds)
-    sheet = client.open("SmartCareerCoachFeedback").sheet1
-    return sheet
+        def get_gsheet():
+            creds_dict = st.secrets["gcp_service_account"]  # No need to .to_json()
+            scope = ["https://www.googleapis.com/auth/spreadsheets", 
+                     "https://www.googleapis.com/auth/drive"]
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+            client = gspread.authorize(creds)
+            return client.open("SmartCareerCoachFeedback").sheet1
+
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # --- Ensure feedback.csv exists ---
