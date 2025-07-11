@@ -105,7 +105,7 @@ Job Description:
                             # 👍 👎 Feedback buttons
                             feedback_key = f"feedback_{idx}"
                             col1, col2 = st.columns(2)
-    col1, col2 = st.columns(2)
+ 
 
     if col1.button("👍 Helpful", key=f"{feedback_key}_up"):
         st.success("Thanks for the feedback!")
