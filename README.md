@@ -1,37 +1,56 @@
-# Smart Career Coach AI
+# 📄 Smart Career Coach – AI Resume Tailoring Tool
 
-## Overview
-Smart Career Coach is an AI-driven web application designed to empower job seekers with personalized career recommendations, including resume optimization and job role suggestions. Built with Python, Pandas, TensorFlow, and deployed via Streamlit, this project addresses job seeker pain points like tailoring resumes for ATS compatibility and identifying high-fit roles. As a Product Manager transitioning from 7+ years in mortgage sales and 4+ years in fintech product operations, I developed this tool to showcase my skills in user-centric product development, feature prioritization, and agile methodologies.
+Smart Career Coach is an AI-powered resume tailoring assistant that compares your resume with a job description and returns personalized, high-confidence edit suggestions. It also collects feedback from users to improve over time.
 
-**Live Demo**: [(https://smart-career-coach1-cfcazcmzu4m5xhyfa6itxg.streamlit.app/)]
+### 🔗 Live Demo
+👉 [Try the App on Streamlit](https://smart-career-coach1-cfcazcmzu4m5xhyfa6itxg.streamlit.app/)
 
-## Problem Statement
-Job seekers struggle to create tailored resumes and find roles matching their skills, leading to low application success rates. Smart Career Coach uses AI to analyze user inputs (e.g., skills, experience) and deliver customized recommendations, improving job search efficiency and ATS compatibility.
+---
 
-## Key Features
-- **Resume Optimization**: Analyzes resumes and job descriptions to suggest improvements, enhancing ATS compatibility by [insert metric, e.g., 20% in mock testing].
-- **Job Role Recommendations**: Matches user profiles to high-fit roles using AI-driven analysis of skills and market trends.
-- **Career Insights Dashboard**: Visualizes user strengths and gaps via Pandas and Streamlit, guiding skill development.
-- **User Feedback Loop**: Iterates on features based on mock user feedback, improving usability and functionality.
+## ✨ Features
 
-## Tech Stack
-- **Languages**: Python
-- **Libraries**: Pandas (data processing)
-- **Tools**: Streamlit 
-- **Platforms**: Streamlit Cloud, [add others if applicable, e.g., AWS for data storage]
+- 🔍 Compares resume to job description using GPT-4o
+- ✏️ Returns 3–5 suggestions with:
+  - Original text
+  - Suggested edit
+  - Confidence level
+  - Explanation
+- 👍 👎 Collects user feedback via thumbs up/down
+- 📊 Viewable feedback log saved in CSV
+- 🧠 Designed to simulate AI product thinking
 
-## Product Management Process
-As the Product Manager for this project, I applied agile principles to deliver a user-centric solution:
-1. **User Research**: Conducted mock interviews with job seekers to identify pain points (e.g., resume tailoring, role matching).
-2. **Requirements Definition**: Created user stories (e.g., “As a job seeker, I want tailored resume suggestions to improve ATS compatibility”) and defined acceptance criteria.
-3. **Feature Prioritization**: Used a MoSCoW framework to prioritize high-impact features (e.g., resume optimization) for the MVP.
-4. **Agile Development**: Iterated in 2-week sprints, incorporating mock feedback to refine the Streamlit interface and AI model.
-5. **Roadmap Planning**: Developed a roadmap outlining MVP (resume optimization, job recommendations) and future phases (e.g., LinkedIn API integration).
-6. **Documentation**: Authored a Product Requirements Document (PRD) detailing user stories, KPIs (e.g., user satisfaction), and technical requirements.
+---
 
-[View PRD: Insert Notion/Google Docs URL if created]
+## 🛠 Tech Stack
 
-## Installation and Usage
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Bib90/smart-career-coach1.git
+- [Streamlit](https://streamlit.io/) – frontend + hosting
+- [OpenAI API](https://platform.openai.com/) – GPT-4o model
+- Python, Pandas, Regex
+- GitHub for version control
+
+---
+
+## 🚀 How It Works
+
+1. Paste your resume
+2. Paste the job description you're targeting
+3. Click "Tailor My Resume"
+4. Review AI-powered suggestions
+5. Provide feedback using 👍 or 👎
+
+All feedback is saved in `feedback.csv` and can be reviewed in-app.
+
+---
+
+## 📸 Screenshots
+
+![Resume Suggestions UI](your-screenshot-link-here)
+> Tailored resume suggestions with explanations and feedback buttons
+
+![Feedback Viewer](your-screenshot-link-here)
+> All feedback saved in CSV and displayed in-app
+
+---
+
+## 📁 Project Structure
+
