@@ -17,8 +17,11 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # --- Ensure feedback.csv exists ---
 if not os.path.exists("feedback.csv"):
-    with open("feedback.csv", "w") as f:
-         f.write(f"{datetime.now()},Suggestion {idx},👍,{parts['confidence']}\n")
+   sheet = get_gsheet()
+sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👍", parts['confidence']])
+sheet = get_gsheet()
+sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👎", parts['confidence']])
+
 
 # --- Set up the app ---
 st.set_page_config(page_title="Smart Career Coach", page_icon="📄")
