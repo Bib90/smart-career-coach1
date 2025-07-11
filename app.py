@@ -71,7 +71,8 @@ Job Description:
                     st.success("Suggestions ready!")
                     st.markdown("### ✏️ Tailored Suggestions:")
 
-            for idx, suggestion_text in enumerate(suggestions_raw, 1):
+                pass
+                for idx, suggestion_text in enumerate(suggestions_raw, 1):
                 parts = {
                     "original": "",
                     "edit": "",
