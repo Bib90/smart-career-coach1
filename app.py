@@ -17,7 +17,7 @@ def get_gsheet():
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # --- Ensure feedback.csv exists ---
-   sheet = get_gsheet()
+sheet = get_gsheet()
 sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👍", parts['confidence']])
 sheet = get_gsheet()
 sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👎", parts['confidence']])
