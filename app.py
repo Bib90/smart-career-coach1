@@ -6,6 +6,7 @@ import pandas as pd
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+
 def get_gsheet():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     creds_dict = st.secrets["gcp_service_account"]
@@ -105,17 +106,24 @@ Job Description:
                             feedback_key = f"feedback_{idx}"
                             col1, col2 = st.columns(2)
 
-                            with col1:
-                                if st.button("👍 Helpful", key=f"{feedback_key}_up"):
-                                    st.success("Thanks for the feedback!")
-                                    with open("feedback.csv", "a") as f:
-                                        f.write(f"{datetime.now()},Suggestion {idx},👍,{parts['confidence']}\n")
+                        with col1:
+    if st.button("👍 Helpful", key=f"{feedback_key}_up"):
+        st.success("Thanks for the feedback!")
+        try:
+            sheet = get_gsheet()
+            sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👍", parts['confidence']])
+        except Exception as e:
+            st.warning(f"Failed to save feedback: {e}")
 
-                            with col2:
-                                if st.button("👎 Not Helpful", key=f"{feedback_key}_down"):
-                                    st.info("Got it — we’ll improve this.")
-                                    with open("feedback.csv", "a") as f:
-                                        f.write(f"{datetime.now()},Suggestion {idx},👎,{parts['confidence']}\n")
+with col2:
+    if st.button("👎 Not Helpful", key=f"{feedback_key}_down"):
+        st.info("Got it — we’ll improve this.")
+        try:
+            sheet = get_gsheet()
+            sheet.append_row([str(datetime.now()), f"Suggestion {idx}", "👎", parts['confidence']])
+        except Exception as e:
+            st.warning(f"Failed to save feedback: {e}")
+
 
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
