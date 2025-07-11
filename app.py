@@ -105,8 +105,9 @@ Job Description:
                             # 👍 👎 Feedback buttons
                             feedback_key = f"feedback_{idx}"
                             col1, col2 = st.columns(2)
-with col1:
-    if st.button("👍 Helpful", key=f"{feedback_key}_up"):
+    col1, col2 = st.columns(2)
+
+    if col1.button("👍 Helpful", key=f"{feedback_key}_up"):
         st.success("Thanks for the feedback!")
         try:
             sheet = get_gsheet()
@@ -114,9 +115,7 @@ with col1:
         except Exception as e:
             st.warning(f"Failed to save feedback: {e}")
 
-
-with col2:
-    if st.button("👎 Not Helpful", key=f"{feedback_key}_down"):
+    if col2.button("👎 Not Helpful", key=f"{feedback_key}_down"):
         st.info("Got it — we’ll improve this.")
         try:
             sheet = get_gsheet()
