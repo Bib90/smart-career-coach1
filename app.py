@@ -24,7 +24,8 @@ with tab1:
     st.title("📄 Smart Career Coach – Resume Tailor")
 
     resume = st.text_area("✍️ Paste your resume here:", height=300)
-    job_description = st.text_area("📌 Paste the job description here:", height=300)
+    job_description = st.text_area("📌 Paste the job description here:",
+                                   height=300)
 
     if st.button("🚀 Tailor My Resume"):
         if not resume or not job_description:
@@ -48,15 +49,18 @@ Job Description:
 """
 
                 try:
-                    response = openai.ChatCompletion.create(
-
-                        model="gpt-4o",
-                        messages=[{"role": "user", "content": prompt}],
-                        temperature=0.4
-                    )
+                    response = openai.ChatCompletion.create(model="gpt-4o",
+                                                            messages=[{
+                                                                "role":
+                                                                "user",
+                                                                "content":
+                                                                prompt
+                                                            }],
+                                                            temperature=0.4)
 
                     raw_reply = response['choices'][0]['message']['content']
-                    suggestions_raw = re.split(r"\n?Original:\s*", raw_reply)[1:]
+                    suggestions_raw = re.split(r"\n?Original:\s*",
+                                               raw_reply)[1:]
 
                     st.success("Suggestions ready!")
                     st.markdown("### ✏️ Tailored Suggestions:")
@@ -72,15 +76,20 @@ Job Description:
                         lines = suggestion_text.strip().split("\n")
                         for line in lines:
                             if line.startswith("Edit:"):
-                                parts["edit"] = line.replace("Edit:", "").strip()
+                                parts["edit"] = line.replace("Edit:",
+                                                             "").strip()
                             elif line.startswith("Confidence:"):
-                                parts["confidence"] = line.replace("Confidence:", "").strip()
+                                parts["confidence"] = line.replace(
+                                    "Confidence:", "").strip()
                             elif line.startswith("Explanation:"):
-                                parts["explanation"] = line.replace("Explanation:", "").strip()
+                                parts["explanation"] = line.replace(
+                                    "Explanation:", "").strip()
                             else:
                                 parts["original"] += line.strip() + " "
 
-                        with st.expander(f"🔍 Suggestion {idx} – Confidence: {parts['confidence']}"):
+                        with st.expander(
+                                f"🔍 Suggestion {idx} – Confidence: {parts['confidence']}"
+                        ):
                             st.markdown(f"""
                             **Original Text**  
                             `{parts['original']}`
@@ -97,16 +106,22 @@ Job Description:
                             col1, col2 = st.columns(2)
 
                             with col1:
-                                if st.button("👍 Helpful", key=f"{feedback_key}_up"):
+                                if st.button("👍 Helpful",
+                                             key=f"{feedback_key}_up"):
                                     st.success("Thanks for the feedback!")
                                     with open("feedback.csv", "a") as f:
-                                        f.write(f"{datetime.now()},Suggestion {idx},👍,{parts['confidence']}\n")
+                                        f.write(
+                                            f"{datetime.now()},Suggestion {idx},👍,{parts['confidence']}\n"
+                                        )
 
                             with col2:
-                                if st.button("👎 Not Helpful", key=f"{feedback_key}_down"):
+                                if st.button("👎 Not Helpful",
+                                             key=f"{feedback_key}_down"):
                                     st.info("Got it — we’ll improve this.")
                                     with open("feedback.csv", "a") as f:
-                                        f.write(f"{datetime.now()},Suggestion {idx},👎,{parts['confidence']}\n")
+                                        f.write(
+                                            f"{datetime.now()},Suggestion {idx},👎,{parts['confidence']}\n"
+                                        )
 
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
