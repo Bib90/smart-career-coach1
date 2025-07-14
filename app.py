@@ -47,6 +47,7 @@ Job Description:
 
                 try:
                     response = openai.ChatCompletion.create(
+
                         model="gpt-4o",
                         messages=[{"role": "user", "content": prompt}],
                         temperature=0.4
