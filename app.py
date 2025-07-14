@@ -1,4 +1,5 @@
-# Trigger redeploy
+print("Triggering Streamlit rebuild...")
+
 import streamlit as st
 import openai
 import os
